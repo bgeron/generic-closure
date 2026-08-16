@@ -1,0 +1,30 @@
+# Supply-chain policy enforced by `mise run deny` and the release gate.
+
+[graph]
+all-features = true
+
+[advisories]
+ignore = []
+
+[licenses]
+allow = [
+    "Apache-2.0",
+    "MIT",
+]
+confidence-threshold = 1.0
+exceptions = [
+    { allow = ["BSD-2-Clause"], crate = "comrak" },
+    { allow = ["Unicode-DFS-2016"], crate = "finl_unicode" },
+    { allow = ["Unicode-3.0"], crate = "unicode-ident" },
+]
+
+[bans]
+multiple-versions = "deny"
+wildcards = "deny"
+highlight = "all"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = []

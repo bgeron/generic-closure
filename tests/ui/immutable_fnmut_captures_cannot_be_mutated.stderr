@@ -1,0 +1,11 @@
+error[E0596]: cannot borrow `*moved` as mutable, as it is behind a `&` reference
+  --> tests/ui/immutable_fnmut_captures_cannot_be_mutated.rs:10:13
+   |
+10 |             moved.push('x');
+   |             ^^^^^ `moved` is a `&` reference, so the data it refers to cannot be borrowed as mutable
+
+error[E0596]: cannot borrow `*cloned` as mutable, as it is behind a `&` reference
+  --> tests/ui/immutable_fnmut_captures_cannot_be_mutated.rs:18:13
+   |
+18 |             cloned.push('x');
+   |             ^^^^^^ `cloned` is a `&` reference, so the data it refers to cannot be borrowed as mutable

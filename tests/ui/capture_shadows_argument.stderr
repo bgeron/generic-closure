@@ -1,0 +1,5 @@
+error[E0416]: identifier `right` is bound more than once in the same pattern
+  --> tests/ui/capture_shadows_argument.rs:12:9
+   |
+12 |         right: i32,
+   |         ^^^^^ used in a pattern more than once

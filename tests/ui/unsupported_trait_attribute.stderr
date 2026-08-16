@@ -1,0 +1,11 @@
+error: closure_trait! accepts only documentation comments before the trait name; other trait attributes are unsupported (expansion-controlling attributes such as `#[cfg(...)]` may precede the macro invocation)
+ --> tests/ui/unsupported_trait_attribute.rs:3:1
+  |
+3 | / closure_trait!(
+4 | |     /// This documentation comment is supported.
+5 | |     #[allow(dead_code)]
+6 | |     Rejected(value: i32)
+7 | | );
+  | |_^
+  |
+  = note: this error originates in the macro `$crate::__generic_closure_parse_trait` which comes from the expansion of the macro `closure_trait` (in Nightly builds, run with -Z macro-backtrace for more info)

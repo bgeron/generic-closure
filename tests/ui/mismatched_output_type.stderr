@@ -1,0 +1,17 @@
+error[E0053]: method `call` has an incompatible type for trait
+ --> tests/ui/mismatched_output_type.rs:7:31
+  |
+7 |         Render(value: i32) -> usize { value as usize }
+  |                               ^^^^^ expected `String`, found `usize`
+  |
+note: type in trait
+ --> tests/ui/mismatched_output_type.rs:3:38
+  |
+3 | closure_trait!(Render(value: i32) -> String);
+  |                                      ^^^^^^
+  = note: expected signature `fn(&__NongenericClosure<'closure>, i32) -> String`
+             found signature `fn(&__NongenericClosure<'closure>, i32) -> usize`
+help: change the output type to match the trait
+  |
+7 |         Render(value: i32) -> String { value as usize }
+  |                               ~~~~~~

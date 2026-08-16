@@ -1,0 +1,13 @@
+error: mutable capture `total` requires a closure signature with `&mut self` or `self`
+  --> tests/ui/mutable_borrow_requires_mut_receiver.rs:7:17
+   |
+7  |       let _read = closure!(
+   |  _________________^
+8  | |         &mut total: i32,
+9  | |         Read(value: i32) -> i32 {
+10 | |             *total += value;
+...  |
+13 | |     );
+   | |_____^
+   |
+   = note: this error originates in the macro `$crate::__generic_closure_parse_closure` which comes from the expansion of the macro `closure` (in Nightly builds, run with -Z macro-backtrace for more info)

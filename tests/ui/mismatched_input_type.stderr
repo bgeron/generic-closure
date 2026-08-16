@@ -1,0 +1,17 @@
+error[E0053]: method `call` has an incompatible type for trait
+ --> tests/ui/mismatched_input_type.rs:7:23
+  |
+7 |         Render(value: i64) -> String { value.to_string() }
+  |                       ^^^ expected `i32`, found `i64`
+  |
+note: type in trait
+ --> tests/ui/mismatched_input_type.rs:3:30
+  |
+3 | closure_trait!(Render(value: i32) -> String);
+  |                              ^^^
+  = note: expected signature `fn(&__NongenericClosure<'closure>, i32) -> String`
+             found signature `fn(&__NongenericClosure<'closure>, i64) -> String`
+help: change the parameter type to match the trait
+  |
+7 |         Render(value: i32) -> String { value.to_string() }
+  |                       ~~~

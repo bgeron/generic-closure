@@ -1,0 +1,12 @@
+error[E0603]: trait `Hidden` is private
+ --> tests/ui/private_trait_is_not_visible.rs:7:33
+  |
+7 | fn require_hidden<T: interface::Hidden>() {}
+  |                                 ^^^^^^ private trait
+  |
+note: the trait `Hidden` is defined here
+ --> tests/ui/private_trait_is_not_visible.rs:4:5
+  |
+4 |     closure_trait!(Hidden(value: i32) -> i32);
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  = note: this error originates in the macro `$crate::__generic_closure_emit_trait` which comes from the expansion of the macro `closure_trait` (in Nightly builds, run with -Z macro-backtrace for more info)

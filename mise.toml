@@ -1,0 +1,59 @@
+[tools]
+"cargo:cargo-deny" = "0.20.2"
+
+[tasks.readme]
+description = "Generate README.md from the crate documentation"
+run = "cargo xtask readme"
+
+[tasks."readme-check"]
+description = "Test the README renderer and check that README.md is current"
+run = [
+  "cargo test --quiet --package xtask",
+  "cargo clippy --quiet --package xtask --all-targets -- -D warnings",
+  "cargo xtask readme --check",
+]
+
+[tasks.fmt]
+description = "Format all Rust code"
+run = "cargo fmt --all"
+
+[tasks."fmt-check"]
+description = "Check Rust formatting"
+run = "cargo fmt --all -- --check"
+
+[tasks."test-doc-propagation"]
+description = "Verify generated trait visibility and documentation"
+run = [
+  "RUSTDOCFLAGS='-D warnings' cargo doc --quiet --no-deps --all-features --example documented_trait",
+  "rg --quiet --fixed-strings 'Converts displayable values to strings.' target/doc/documented_trait/interface/trait.Render.html",
+  "rg --quiet --fixed-strings 'pub trait Render {' target/doc/documented_trait/interface/trait.Render.html",
+]
+
+[tasks.test]
+description = "Run tests, lints, and documentation checks"
+depends = ["test-doc-propagation"]
+run = [
+  "cargo test --quiet --no-default-features",
+  "cargo test --quiet --no-default-features --features alloc",
+  "cargo test --quiet --no-default-features --features either",
+  "cargo test --quiet --all-features",
+  "cargo clippy --quiet --all-targets --all-features -- -D warnings",
+  "RUSTDOCFLAGS='-D warnings' cargo doc --quiet --no-deps --all-features",
+  "cargo package --quiet --allow-dirty",
+]
+
+[tasks.deny]
+description = "Check advisories, licenses, dependency bans, and sources"
+run = "cargo deny --workspace --locked check"
+
+[tasks.gate]
+description = "Run formatting, supply-chain policy, and the complete test suite"
+depends = ["fmt-check", "readme-check", "deny", "test"]
+
+[tasks.check-todo]
+description = "Fail if project files contain TODO markers"
+run = "if rg -iw todo --glob '!mise.toml' .; then false; else true; fi"
+
+[tasks.gate-todo]
+depends = ["fmt-check", "readme-check", "deny", "test", "check-todo"]
+

@@ -1,0 +1,11 @@
+error[E0050]: method `call` has 2 parameters but the declaration in trait `Add::call` has 3
+ --> tests/ui/mismatched_argument_count.rs:6:36
+  |
+3 |    closure_trait!(Add(left: i32, right: i32) -> i32);
+  |  __________________________________________-
+4 | |
+5 | |  fn main() {
+6 | |      let _ = closure!(Add(value: i32) -> i32 { value });
+  | | ____________________________________^
+... ||
+... ||

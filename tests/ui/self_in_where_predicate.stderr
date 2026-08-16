@@ -1,0 +1,14 @@
+error[E0411]: cannot find type `Self` in this scope
+ --> tests/ui/self_in_where_predicate.rs:3:46
+  |
+3 | closure_trait!(Call<T: Copy>(value: T) where Self: Sized);
+  | ---------------------------------------------^^^^--------
+  | |                                            |
+  | |                                            `Self` is only available in impls, traits, and type definitions
+  | `Self` not allowed in a function
+
+error[E0282]: type annotations needed
+ --> tests/ui/self_in_where_predicate.rs:3:37
+  |
+3 | closure_trait!(Call<T: Copy>(value: T) where Self: Sized);
+  |                                     ^ cannot infer type for type parameter `T`

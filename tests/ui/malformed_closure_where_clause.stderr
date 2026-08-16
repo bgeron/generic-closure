@@ -1,0 +1,7 @@
+error: malformed closure! where clause; expected at least one predicate followed by a body
+ --> tests/ui/malformed_closure_where_clause.rs:4:13
+  |
+4 |     let _ = closure!(Broken<T: std::fmt::Debug>(value: T) where { value });
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the macro `$crate::__generic_closure_parse_closure` which comes from the expansion of the macro `closure` (in Nightly builds, run with -Z macro-backtrace for more info)

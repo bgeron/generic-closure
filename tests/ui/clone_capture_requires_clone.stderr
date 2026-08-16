@@ -1,0 +1,19 @@
+error[E0277]: the trait bound `NotClone: Clone` is not satisfied
+  --> tests/ui/clone_capture_requires_clone.rs:9:13
+   |
+9  |       let _ = closure!(
+   |  _____________^
+10 | |         clone value: NotClone,
+11 | |         Read(_input: ()) -> usize { value.0 }
+12 | |     );
+   | |     ^
+   | |     |
+   | |_____the trait `Clone` is not implemented for `NotClone`
+   |       required by a bound introduced by this call
+   |
+   = note: this error originates in the macro `$crate::__generic_closure_parse_closure` which comes from the expansion of the macro `closure` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: consider annotating `NotClone` with `#[derive(Clone)]`
+   |
+5  + #[derive(Clone)]
+6  | struct NotClone(usize);
+   |

@@ -1,0 +1,10 @@
+error: malformed closure! generic arguments; expected `name: Type` arguments such as `(value: T)` or `(left: T, right: T)`, optionally preceded by `&self`, `&mut self`, or `self`
+ --> tests/ui/malformed_closure_signature.rs:4:13
+  |
+4 |       let _ = closure!(
+  |  _____________^
+5 | |         Render<T: std::fmt::Display>(T) -> String { String::new() }
+6 | |     );
+  | |_____^
+  |
+  = note: this error originates in the macro `$crate::__generic_closure_parse_closure` which comes from the expansion of the macro `closure` (in Nightly builds, run with -Z macro-backtrace for more info)

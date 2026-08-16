@@ -1,0 +1,11 @@
+error: malformed closure! invocation; expected comma-terminated captures such as `x: Type`, `mut x: Type`, `clone x: Type`, `clone mut x: Type`, `&x: Type`, or `&mut x: Type`, followed by a call signature
+ --> tests/ui/malformed_capture_list.rs:5:13
+  |
+5 |       let _ = closure!(
+  |  _____________^
+6 | |         prefix: String
+7 | |         Render<T: std::fmt::Display>(value: T) -> String { format!("{prefix}{value}") }
+8 | |     );
+  | |_____^
+  |
+  = note: this error originates in the macro `$crate::__generic_closure_parse_closure` which comes from the expansion of the macro `closure` (in Nightly builds, run with -Z macro-backtrace for more info)

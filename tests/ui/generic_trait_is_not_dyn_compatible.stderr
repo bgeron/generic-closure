@@ -1,0 +1,21 @@
+error[E0038]: the trait `Render` cannot be made into an object
+ --> tests/ui/generic_trait_is_not_dyn_compatible.rs:6:22
+  |
+6 | fn accept_erased(_: &dyn Render) {}
+  |                      ^^^^^^^^^^ `Render` cannot be made into an object
+  |
+note: for a trait to be "dyn-compatible" it needs to allow building a vtable to allow the call to be resolvable dynamically; for more information visit <https://doc.rust-lang.org/reference/items/traits.html#object-safety>
+ --> tests/ui/generic_trait_is_not_dyn_compatible.rs:4:1
+  |
+4 | closure_trait!(Render<T: Display>(value: T) -> String);
+  | ^^^^^^^^^^^^^^^------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  | |              |
+  | |              this trait cannot be made into an object...
+  | ...because method `call` has generic type parameters
+  | ...because method `call_mut` has generic type parameters
+  | ...because method `call_box` has generic type parameters
+  = help: consider moving `call` to another trait
+  = help: consider moving `call_mut` to another trait
+  = help: consider moving `call_box` to another trait
+  = help: only type `generic_closure::Either<__GenericClosureEitherLeft, __GenericClosureEitherRight>` implements the trait, consider using it directly instead
+  = note: this error originates in the macro `$crate::__generic_closure_emit_trait` which comes from the expansion of the macro `closure_trait` (in Nightly builds, run with -Z macro-backtrace for more info)

@@ -1,0 +1,8 @@
+error[E0276]: impl has stricter requirements than trait
+ --> tests/ui/mismatched_generic_bounds.rs:8:21
+  |
+4 | closure_trait!(Describe<T: Debug>(value: T) -> String);
+  | ------------------------------------------------------ definition of `call` from trait
+...
+8 |         Describe<T: Display>(value: T) -> String { value.to_string() }
+  |                     ^^^^^^^ impl has extra requirement `T: std::fmt::Display`

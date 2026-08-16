@@ -1,0 +1,7 @@
+error: malformed closure_trait! non-generic arguments; expected `name: Type` arguments such as `(value: i32)` or `(left: i32, right: i32)`, optionally preceded by `&self`, `&mut self`, or `self`
+ --> tests/ui/unnamed_nongeneric_trait_argument.rs:3:1
+  |
+3 | closure_trait!(Render(i32) -> String);
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the macro `$crate::__generic_closure_parse_trait` which comes from the expansion of the macro `closure_trait` (in Nightly builds, run with -Z macro-backtrace for more info)

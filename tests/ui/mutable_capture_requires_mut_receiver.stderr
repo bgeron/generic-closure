@@ -1,0 +1,13 @@
+error: mutable capture `text` requires a closure signature with `&mut self` or `self`
+  --> tests/ui/mutable_capture_requires_mut_receiver.rs:7:19
+   |
+7  |       let _render = closure!(
+   |  ___________________^
+8  | |         mut text: String,
+9  | |         Render(value: i32) -> String {
+10 | |             text.push_str(&value.to_string());
+...  |
+13 | |     );
+   | |_____^
+   |
+   = note: this error originates in the macro `$crate::__generic_closure_parse_closure` which comes from the expansion of the macro `closure` (in Nightly builds, run with -Z macro-backtrace for more info)

@@ -1,0 +1,16 @@
+error[E0597]: `prefix` does not live long enough
+  --> tests/ui/borrowed_capture_escapes_owner.rs:8:9
+   |
+6  |       let render = {
+   |           ------ borrow later stored here
+7  |           let prefix = String::from("value=");
+   |               ------ binding `prefix` declared here
+8  | /         closure!(
+9  | |             &prefix: String,
+10 | |             Render(value: i32) -> String { format!("{prefix}{value}") }
+11 | |         )
+   | |_________^ borrowed value does not live long enough
+12 |       };
+   |       - `prefix` dropped here while still borrowed
+   |
+   = note: this error originates in the macro `$crate::__generic_closure_parse_closure` which comes from the expansion of the macro `closure` (in Nightly builds, run with -Z macro-backtrace for more info)
